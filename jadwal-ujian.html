@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Jadwal Ujian | SMP Negeri 2 Kusan Hilir</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        :root {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --surface2: #334155;
+            --accent1: #6366f1;
+            --accent2: #8b5cf6;
+            --accent3: #06b6d4;
+            --accent4: #10b981;
+            --orange1: #f59e0b;
+            --orange2: #ea580c;
+            --rose1: #f43f5e;
+            --rose2: #e11d48;
+            --text: #f1f5f9;
+            --text2: #94a3b8;
+            --text3: #64748b;
+            --border: rgba(255, 255, 255, 0.08);
+            --red: #f87171
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 12px;
+            background-image: radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(6, 182, 212, 0.06) 0%, transparent 50%)
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto
+        }
+
+        .header {
+            text-align: center;
+            padding: 24px 16px;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(139, 92, 246, 0.08));
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent1), var(--accent3), var(--accent2))
+        }
+
+        .school-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(6, 182, 212, 0.12);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--accent3);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            border: 1px solid rgba(6, 182, 212, 0.2)
+        }
+
+        .header h1 {
+            font-size: 18px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--accent3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 4px
+        }
+
+        .header h2 {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text2)
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 16px
+        }
+
+        .stat {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 4px;
+            text-align: center
+        }
+
+        .stat-num {
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent1), var(--accent3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .stat-label {
+            font-size: 9px;
+            color: var(--text3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            margin-top: 2px
+        }
+
+        .tabs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-bottom: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: var(--bg);
+            padding: 8px 0
+        }
+
+        .tab {
+            padding: 8px 4px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 9px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all .3s;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text2);
+            line-height: 1.3
+        }
+
+        .tab.active-d1 {
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3)
+        }
+
+        .tab.active-d2 {
+            background: linear-gradient(135deg, var(--accent3), var(--accent4));
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3)
+        }
+
+        .tab.active-d3 {
+            background: linear-gradient(135deg, var(--orange1), var(--orange2));
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3)
+        }
+
+        .tab.active-d4 {
+            background: linear-gradient(135deg, var(--rose1), var(--rose2));
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(244, 63, 94, 0.3)
+        }
+
+        .tab-icon {
+            font-size: 14px;
+            display: block;
+            margin-bottom: 2px
+        }
+
+        .tab-mapel {
+            font-size: 8px;
+            opacity: .85;
+            margin-top: 2px;
+            font-weight: 500
+        }
+
+        .day-panel {
+            display: none
+        }
+
+        .day-panel.active {
+            display: block;
+            animation: fadeIn .4s ease
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .mapel-banner {
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 14px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px
+        }
+
+        .mb-mtk {
+            background: linear-gradient(135deg, var(--accent1), var(--accent2))
+        }
+
+        .mb-ind {
+            background: linear-gradient(135deg, var(--accent3), var(--accent4))
+        }
+
+        .mb-mtk2 {
+            background: linear-gradient(135deg, var(--orange1), var(--orange2))
+        }
+
+        .mb-ind2 {
+            background: linear-gradient(135deg, var(--rose1), var(--rose2))
+        }
+
+        .session-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            margin-bottom: 14px;
+            overflow: hidden
+        }
+
+        .session-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .sesi-num {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 800;
+            color: #fff;
+            flex-shrink: 0
+        }
+
+        .sn-1 {
+            background: linear-gradient(135deg, var(--accent1), var(--accent2))
+        }
+
+        .sn-2 {
+            background: linear-gradient(135deg, var(--accent3), var(--accent4))
+        }
+
+        .sn-3 {
+            background: linear-gradient(135deg, var(--orange1), var(--orange2))
+        }
+
+        .sn-4 {
+            background: linear-gradient(135deg, var(--rose1), var(--rose2))
+        }
+
+        .session-info {
+            flex: 1
+        }
+
+        .session-label {
+            font-size: 10px;
+            color: var(--text3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700
+        }
+
+        .session-time {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--red);
+            margin-top: 2px
+        }
+
+        .session-time::before {
+            content: '⏰';
+            font-size: 12px
+        }
+
+        .pengawas-section {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(0, 0, 0, 0.15)
+        }
+
+        .section-title {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text3);
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .section-title::before {
+            content: '';
+            width: 12px;
+            height: 2px;
+            border-radius: 1px
+        }
+
+        .section-title.pt::before {
+            background: linear-gradient(90deg, var(--accent1), var(--accent2))
+        }
+
+        .section-title.st::before {
+            background: linear-gradient(90deg, var(--accent4), var(--accent3))
+        }
+
+        .pengawas-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0
+        }
+
+        .p-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0
+        }
+
+        .av1 {
+            background: linear-gradient(135deg, #f59e0b, #ef4444)
+        }
+
+        .av2 {
+            background: linear-gradient(135deg, #8b5cf6, #ec4899)
+        }
+
+        .p-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text)
+        }
+
+        .p-role {
+            font-size: 9px;
+            color: var(--text3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600
+        }
+
+        .peserta-section {
+            padding: 12px 14px
+        }
+
+        .peserta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px;
+            border-radius: 6px
+        }
+
+        .peserta-item:nth-child(even) {
+            background: rgba(255, 255, 255, 0.02)
+        }
+
+        .p-num {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text3);
+            flex-shrink: 0
+        }
+
+        .p-nama {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--accent4);
+            flex: 1;
+            line-height: 1.3
+        }
+
+        .badge {
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            letter-spacing: .5px;
+            flex-shrink: 0
+        }
+
+        .b-9A {
+            background: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+            border: 1px solid rgba(99, 102, 241, 0.2)
+        }
+
+        .b-9B {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.2)
+        }
+
+        .b-9C {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.2)
+        }
+
+        .b-9D {
+            background: rgba(236, 72, 153, 0.15);
+            color: #f472b6;
+            border: 1px solid rgba(236, 72, 153, 0.2)
+        }
+
+        .b-9E {
+            background: rgba(6, 182, 212, 0.15);
+            color: #22d3ee;
+            border: 1px solid rgba(6, 182, 212, 0.2)
+        }
+
+        .toggle-btn {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text2);
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 8px;
+            font-family: 'Inter', sans-serif;
+            transition: all .2s
+        }
+
+        .toggle-btn:hover,
+        .toggle-btn:active {
+            background: rgba(99, 102, 241, 0.08);
+            color: var(--text)
+        }
+
+        .peserta-list {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .4s ease
+        }
+
+        .peserta-list.open {
+            max-height: 2000px
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            color: var(--text3);
+            font-size: 10px
+        }
+
+        .footer span {
+            color: var(--accent3)
+        }
+
+        .gelombang-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text3)
+        }
+
+        .gelombang-label::before,
+        .gelombang-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border)
+        }
+
+        .gelombang-label .gl-badge {
+            background: rgba(99, 102, 241, 0.12);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            color: var(--accent1);
+            white-space: nowrap
+        }
+
+        .gelombang-label .gl-badge.gl2 {
+            background: rgba(245, 158, 11, 0.12);
+            border-color: rgba(245, 158, 11, 0.2);
+            color: var(--orange1)
+        }
+
+        .kegiatan-section {
+            margin-bottom: 16px
+        }
+
+        .kegiatan-title {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text3);
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-align: center
+        }
+
+        .kegiatan-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px
+        }
+
+        .kegiatan-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all .3s;
+            position: relative;
+            overflow: hidden
+        }
+
+        .kegiatan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--border);
+            transition: background .3s
+        }
+
+        .kegiatan-card.active {
+            border-color: rgba(99, 102, 241, 0.4);
+            background: rgba(99, 102, 241, 0.08)
+        }
+
+        .kegiatan-card.active::before {
+            background: linear-gradient(90deg, var(--accent1), var(--accent3))
+        }
+
+        .kegiatan-icon {
+            font-size: 20px;
+            margin-bottom: 4px
+        }
+
+        .kegiatan-name {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px
+        }
+
+        .kegiatan-card.active .kegiatan-name {
+            color: #818cf8
+        }
+
+        .kegiatan-dates {
+            font-size: 9px;
+            color: var(--text3);
+            line-height: 1.4
+        }
+
+        .kegiatan-dates .kd-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px
+        }
+
+        .kegiatan-dates .kd-label {
+            font-weight: 600;
+            color: var(--text2)
+        }
+
+        .gl-date {
+            font-size: 9px;
+            color: var(--accent3);
+            font-weight: 600;
+            margin-left: 4px
+        }
+
+        /* POPUP */
+        .popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(6px);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            animation: fadeIn .3s ease
+        }
+
+        .popup-overlay.hidden {
+            display: none
+        }
+
+        .popup {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            max-width: 420px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            animation: popIn .4s ease
+        }
+
+        @keyframes popIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px)
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0)
+            }
+        }
+
+        .popup-header {
+            padding: 20px 20px 12px;
+            text-align: center;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .popup-header .popup-icon {
+            font-size: 36px;
+            margin-bottom: 8px
+        }
+
+        .popup-header h3 {
+            font-size: 16px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, var(--accent3));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent
+        }
+
+        .popup-header p {
+            font-size: 11px;
+            color: var(--text2);
+            margin-top: 4px
+        }
+
+        .popup-body {
+            padding: 16px 20px
+        }
+
+        .popup-step {
+            display: flex;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border)
+        }
+
+        .popup-step:last-child {
+            border-bottom: none
+        }
+
+        .popup-step-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(99, 102, 241, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0
+        }
+
+        .popup-step-text {
+            flex: 1
+        }
+
+        .popup-step-text strong {
+            font-size: 12px;
+            color: var(--text);
+            display: block;
+            margin-bottom: 2px
+        }
+
+        .popup-step-text span {
+            font-size: 11px;
+            color: var(--text2);
+            line-height: 1.4
+        }
+
+        .popup-footer {
+            padding: 12px 20px 20px;
+            text-align: center
+        }
+
+        .popup-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent1), var(--accent2));
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all .2s;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3)
+        }
+
+        .popup-btn:active {
+            transform: scale(0.97)
+        }
+    </style>
+</head>
+
+<body>
+    <!-- INFO POPUP -->
+    <div class="popup-overlay" id="infoPopup">
+        <div class="popup">
+            <div class="popup-header">
+                <div class="popup-icon">📖</div>
+                <h3>Cara Membaca Jadwal</h3>
+                <p>Panduan navigasi jadwal ujian</p>
+            </div>
+            <div class="popup-body">
+                <div class="popup-step">
+                    <div class="popup-step-icon">📋</div>
+                    <div class="popup-step-text">
+                        <strong>1. Pilih Kegiatan</strong>
+                        <span>Pilih jenis kegiatan: <b>Simulasi</b>, <b>Gladi Bersih</b>, atau <b>Hari H</b>. Tanggal
+                            pelaksanaan akan menyesuaikan otomatis.</span>
+                    </div>
+                </div>
+                <div class="popup-step">
+                    <div class="popup-step-icon">🌊</div>
+                    <div class="popup-step-text">
+                        <strong>2. Kenali Gelombang</strong>
+                        <span><b>Gelombang 1</b> = Sesi 1-4 (ujian Hari 1 & 2). <b>Gelombang 2</b> = Sesi 5-8 (ujian
+                            Hari 3 & 4). Cari sesi kamu di gelombang yang sesuai.</span>
+                    </div>
+                </div>
+                <div class="popup-step">
+                    <div class="popup-step-icon">📅</div>
+                    <div class="popup-step-text">
+                        <strong>3. Pilih Hari</strong>
+                        <span>Tap tab <b>Hari 1/3</b> (Matematika) atau <b>Hari 2/4</b> (B. Indonesia). Peserta &
+                            pengawas sama untuk kedua hari di gelombang yang sama.</span>
+                    </div>
+                </div>
+                <div class="popup-step">
+                    <div class="popup-step-icon">⏰</div>
+                    <div class="popup-step-text">
+                        <strong>4. Cek Sesi & Waktu</strong>
+                        <span>Setiap sesi menampilkan waktu ujian, tim pengawas, dan daftar peserta. Tap tombol
+                            <b>"Tampilkan Peserta"</b> untuk melihat nama-nama.</span>
+                    </div>
+                </div>
+                <div class="popup-step">
+                    <div class="popup-step-icon">🏷️</div>
+                    <div class="popup-step-text">
+                        <strong>5. Badge Kelas</strong>
+                        <span>Warna badge menandakan kelas: <b style="color:#818cf8">9A</b>, <b
+                                style="color:#34d399">9B</b>, <b style="color:#fbbf24">9C</b>, <b
+                                style="color:#f472b6">9D</b>, <b style="color:#22d3ee">9E</b>.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="popup-footer">
+                <button class="popup-btn" onclick="closePopup()">Mengerti, Lihat Jadwal →</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="school-badge">📚 SMP Negeri 2 Kusan Hilir</div>
+            <h1>Jadwal Pengawas & Peserta</h1>
+            <h2>Ujian Tahun Pelajaran 2025/2026</h2>
+        </div>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-num">8</div>
+                <div class="stat-label">Sesi</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">4</div>
+                <div class="stat-label">Hari</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">16</div>
+                <div class="stat-label">Pengawas</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num">147</div>
+                <div class="stat-label">Peserta</div>
+            </div>
+        </div>
+
+        <!-- KEGIATAN SELECTOR -->
+        <div class="kegiatan-section">
+            <div class="kegiatan-title">📋 Pilih Kegiatan</div>
+            <div class="kegiatan-cards">
+                <div class="kegiatan-card active" onclick="selectKegiatan(0)" id="kg0">
+                    <div class="kegiatan-icon">📝</div>
+                    <div class="kegiatan-name">Simulasi</div>
+                    <div class="kegiatan-dates">
+                        <div class="kd-row"><span class="kd-label">Gel 1:</span> 23-24 Feb</div>
+                        <div class="kd-row"><span class="kd-label">Gel 2:</span> 25-26 Feb</div>
+                    </div>
+                </div>
+                <div class="kegiatan-card" onclick="selectKegiatan(1)" id="kg1">
+                    <div class="kegiatan-icon">🎯</div>
+                    <div class="kegiatan-name">Gladi Bersih</div>
+                    <div class="kegiatan-dates">
+                        <div class="kd-row"><span class="kd-label">Gel 1:</span> 9-10 Mar</div>
+                        <div class="kd-row"><span class="kd-label">Gel 2:</span> 11-12 Mar</div>
+                    </div>
+                </div>
+                <div class="kegiatan-card" onclick="selectKegiatan(2)" id="kg2">
+                    <div class="kegiatan-icon">🏆</div>
+                    <div class="kegiatan-name">Hari H</div>
+                    <div class="kegiatan-dates">
+                        <div class="kd-row"><span class="kd-label">Gel 1:</span> 6-7 Apr</div>
+                        <div class="kd-row"><span class="kd-label">Gel 2:</span> 8-9 Apr</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="gelombang-label"><span class="gl-badge">🌊 Gelombang 1 — Sesi 1-4</span><span class="gl-date"
+                id="gl1-date">23-24 Februari 2026</span></div>
+        <div class="tabs" style="grid-template-columns:repeat(2,1fr);margin-bottom:8px">
+            <div class="tab active-d1" onclick="switchDay(1)" id="tab1"><span class="tab-icon">📐</span>Hari 1<div
+                    class="tab-mapel">Matematika</div>
+            </div>
+            <div class="tab" onclick="switchDay(2)" id="tab2"><span class="tab-icon">📖</span>Hari 2<div
+                    class="tab-mapel">B. Indonesia</div>
+            </div>
+        </div>
+        <div class="gelombang-label"><span class="gl-badge gl2">🌊 Gelombang 2 — Sesi 5-8</span><span class="gl-date"
+                id="gl2-date">25-26 Februari 2026</span></div>
+        <div class="tabs" style="grid-template-columns:repeat(2,1fr)">
+            <div class="tab" onclick="switchDay(3)" id="tab3"><span class="tab-icon">📐</span>Hari 3<div
+                    class="tab-mapel">Matematika</div>
+            </div>
+            <div class="tab" onclick="switchDay(4)" id="tab4"><span class="tab-icon">📖</span>Hari 4<div
+                    class="tab-mapel">B. Indonesia</div>
+            </div>
+        </div>
+
+        <!-- Content will be rendered by JS -->
+        <div id="day1" class="day-panel active"></div>
+        <div id="day2" class="day-panel"></div>
+        <div id="day3" class="day-panel"></div>
+        <div id="day4" class="day-panel"></div>
+
+        <div class="footer">SMP Negeri 2 Kusan Hilir — <span>Jadwal Ujian 2026</span></div>
+    </div>
+
+    <script>
+        const sessions = [
+            // Sesi 1-4 (Grup A)
+            {
+                sesi: 1, waktu: '08.00 – 09.45', p1: ['RU', 'Ridhani Ulfah, S.Pd.'], p2: ['SR', 'Sariah, S.Pd'], total: 20,
+                siswa: [['MILANA', '9B'], ['AHMAD ILHAM', '9B'], ['MUHAMMAD AKBAR', '9B'], ['NORHASNAH', '9B'], ['M. NAILANI', '9B'], ['KASYFUL ANWAR', '9B'], ['SERLIY AULIA', '9B'], ['ALDI', '9B'], ['ANA ALTHAFUND NISA', '9B'], ['AIMAN NUR', '9B'], ['MARDANIAH', '9B'], ['ACHMAD MAULANA', '9B'], ['AZIFAH NUR ALYA', '9B'], ['FATIMAH AZZAHRA ASSYIFA', '9B'], ['MUHAMMAD AFRIGA AL ASMI', '9B'], ['DESAR TIRWAN PRATAMA', '9B'], ['FATIMAH AZ-ZAHRA', '9B'], ['ILHAM', '9B'], ['MUHAMMAD WILDAN', '9B'], ['PIRDA DAMAYANTI', '9B']]
+            },
+            {
+                sesi: 2, waktu: '10.15 – 12.00', p1: ['MW', 'Marwansyah, S.Pd'], p2: ['EA', 'Elisa Afriani, S.Pd.I.'], total: 20,
+                siswa: [['ANDI KURNIAWAN', '9B'], ['DINA PUSPA', '9B'], ['KAMILA ARIAGUSTINA R.', '9B'], ['MUHAMMAD SYARIF H.', '9B'], ['MUHAMMAD MARDAN', '9B'], ['KHINANTI PUSPA K.', '9B'], ['MUHAMMAD DAVID', '9B'], ['M. SHAIB FAWWAZ', '9B'], ['MUHAMMAD ERZA A. P.', '9B'], ['PUTRI AULIA', '9D'], ['ACHMAD MUSAFAK', '9D'], ['M. TAHIR', '9D'], ['SETOYUDA', '9D'], ['ST. NUR HALISAH', '9D'], ['MUHAMMAD WILDAN', '9D'], ['SITI FATIMAH AL ZZAHRA', '9D'], ['AHMAD SULAIMAN', '9D'], ['MUHAMMAD IRFAN SAFARI', '9D'], ['DINA APRILIA', '9D'], ['MUSHOFFA AQMAL', '9D']]
+            },
+            {
+                sesi: 3, waktu: '12.30 – 14.15', p1: ['HA', 'Helen Adriaty, S.Pd'], p2: ['SM', 'Syahrul Ma\'Arif, S.Pd.'], total: 20,
+                siswa: [['HERMANSYAH', '9D'], ['MUHAMMAD YAHYA', '9D'], ['WAHDATUS SOLEHAH', '9D'], ['POLIGEN', '9D'], ['NUR AULIA RISKI', '9D'], ['NURUL AINI', '9D'], ['MUHAMMAD SURYO', '9D'], ['HAFIS DIAN RIFANI', '9D'], ['DIRI NUR HIKMAH', '9D'], ['M. RIFAN SANDI', '9D'], ['MUHAMMAD RAIHAN ALI', '9D'], ['SARNIAH', '9D'], ['ST. RAODAH ARABIAH', '9D'], ['EJAYANI', '9D'], ['AMELIA PUTRI', '9D'], ['MUHAMMAD PAUZAN', '9D'], ['MUHAMMAD RAFI HUDNA', '9D'], ['USWATUL HASANAH', '9D'], ['NUR ALFISAH', '9C'], ['RAHIL FATIMA ZAHRAH', '9C']]
+            },
+            {
+                sesi: 4, waktu: '14.45 – 16.30', p1: ['RY', 'Riyani, S.Pd.'], p2: ['SI', 'Syamsul Islam, S.Pd.'], total: 20,
+                siswa: [['MARDANI', '9C'], ['MUSLIANA', '9C'], ['AHMAD YUSUP', '9C'], ['M. ASRIL', '9C'], ['NABILA PUTRI ASYIFA', '9C'], ['FAJAR', '9C'], ['RISKA AMELIA PUTRI', '9C'], ['NUR AHLINA', '9C'], ['SAYLINDA FEBRIANTI', '9C'], ['MUHAMMAD ALI AZHAR', '9C'], ['MUHAMMAD AZAM MAULANA', '9C'], ['MUHAMMAD ISLAM', '9C'], ['ZAHIRATU ZAHRA', '9C'], ['NUR HAKIKI', '9C'], ['NUR NABILA', '9C'], ['ALFIANSYAH', '9C'], ['AHLIATUR ROSYADA', '9C'], ['RISKY YOGI YANUR', '9C'], ['KHOIRUL AZAM', '9C'], ['M. AKHLUL YAZID', '9C']]
+            },
+            // Sesi 5-8 (Grup B)
+            {
+                sesi: 5, waktu: '08.00 – 09.45', p1: ['NS', 'Nor Sa\'adah, S.Pd.'], p2: ['RH', 'Rahmadi, S.Pd.'], total: 20,
+                siswa: [['NOVITA AMANDA PUTRI', '9C'], ['SITI NUR AISA', '9C'], ['MERLINA SHINTA DEWI', '9C'], ['M. JUMANSYAH', '9C'], ['AULIA RAHAYU', '9C'], ['M. RIZKY RAMADANA', '9C'], ['ERVIN ZENDI FERNANDO', '9C'], ['HALIL RAHMAN', '9C'], ['MAHDA LIA', '9A'], ['AINUL HASNAH RAMADANI', '9A'], ['MUHAMMAD UCHOK', '9A'], ['HENGKY ANGGARA NOVA', '9A'], ['MUHAMMAD ALI WARDANA', '9A'], ['PUTRA', '9A'], ['ABDUL MALIK', '9A'], ['HAIRUN NISA', '9A'], ['ALMA NAZUWA', '9A'], ['KALENA PUTRI', '9A'], ['ASPIATUL HUDA', '9A'], ['ARJUNA SAPUTRA', '9A']]
+            },
+            {
+                sesi: 6, waktu: '10.15 – 12.00', p1: ['MH', 'Maria Hastuti, S.Pd.'], p2: ['SH', 'Siti Hapsah, S.Pd'], total: 20,
+                siswa: [['SITTI ZULPA KHUMAIRATUS Z.', '9A'], ['FIRHA ALYA', '9A'], ['AHMAD SANDY', '9A'], ['SITI MAHSYTA', '9A'], ['MUHAMMAD FADILLAH', '9A'], ['HERNI WIYATI', '9A'], ['SABIL RIZKI', '9A'], ['NAYLA OKTAVIA RIZKI', '9A'], ['DANIEL ADRIAN', '9A'], ['MUHAMMAD SAID', '9A'], ['ABDUL HIDAYAT MOKODONGAN', '9A'], ['M. ANDHIKA YUDHA W.', '9A'], ['M. ZULFADLI', '9A'], ['RENDRA SAPUTRA', '9A'], ['ROZAAN MAULANA', '9A'], ['RAHMATULLAH', '9A'], ['SITI FATIMAH AZZAHRA', '9A'], ['M. ARMAN MAULANA', '9E'], ['MUHAMMAD SAIFULLAH', '9E'], ['AHMAD ZEIN AFIF', '9E']]
+            },
+            {
+                sesi: 7, waktu: '12.30 – 14.15', p1: ['LS', 'Laily Somalia Sari, S.Pd.'], p2: ['KA', 'Kasriani Anwar, S.Pd.'], total: 20,
+                siswa: [['NUR ADELIA PUTRI', '9E'], ['BAHRUDIN', '9E'], ['MUSDALIFAH', '9E'], ['MUHAMMAD RIDHO', '9E'], ['PAMRIANSYAH', '9E'], ['M. RISKY ADITIYAH', '9E'], ['DANENDRA ALFITRAH P. A.', '9E'], ['MUHAMMAD AZHAR I. F.', '9E'], ['NURUL AFIFAH', '9E'], ['M. IBRAHIM', '9E'], ['SAPARIAH', '9E'], ['MUHAMMAD SULTAN ABIMANYU', '9E'], ['SITI AISYAH', '9E'], ['MUHAMMAD IQBALLI', '9E'], ['M. NUR SYAHRI RAMADHAN', '9E'], ['M. JEPRI', '9E'], ['RIZKA AMELIA', '9E'], ['MUHAMMAD RIDWAN FIRDAUS', '9E'], ['RAHMIA MUZHIRAH', '9E'], ['MUHAMMAD RAHMAD', '9E']]
+            },
+            {
+                sesi: 8, waktu: '14.45 – 16.30', p1: ['SS', 'Samsul, S.Pd'], p2: ['AS', 'Aulia Sari, S.Pd.I.'], total: 7,
+                siswa: [['ENDANG NUR HALIA', '9E'], ['MAULIDAH NABILA PUTRI', '9E'], ['MUHAMMAD DAPIT', '9E'], ['NOR AINI', '9E'], ['DHIFA PRATIWI', '9E'], ['AHMAD DAFFA GARCIA', '9E'], ['MUHAMMAD IRLANDO O. A.', '9E']]
+            }
+        ];
+
+        const dayConfig = [
+            { label: 'Gelombang 1 · Hari Pertama — Matematika', cls: 'mb-mtk', sessions: [0, 1, 2, 3], snCls: 'sn-1' },
+            { label: 'Gelombang 1 · Hari Kedua — Bahasa Indonesia', cls: 'mb-ind', sessions: [0, 1, 2, 3], snCls: 'sn-2' },
+            { label: 'Gelombang 2 · Hari Ketiga — Matematika', cls: 'mb-mtk2', sessions: [4, 5, 6, 7], snCls: 'sn-3' },
+            { label: 'Gelombang 2 · Hari Keempat — Bahasa Indonesia', cls: 'mb-ind2', sessions: [4, 5, 6, 7], snCls: 'sn-4' }
+        ];
+
+        function renderDay(dayIdx) {
+            const cfg = dayConfig[dayIdx];
+            let h = `<div class="mapel-banner ${cfg.cls}">${dayIdx % 2 === 0 ? '📐' : '📖'} ${cfg.label}</div>`;
+            cfg.sessions.forEach(si => {
+                const s = sessions[si];
+                const pesertaHtml = s.siswa.map((p, i) =>
+                    `<div class="peserta-item"><div class="p-num">${i + 1}</div><div class="p-nama">${p[0]}</div><span class="badge b-${p[1]}">${p[1]}</span></div>`
+                ).join('');
+                h += `<div class="session-card">
+      <div class="session-top"><div class="sesi-num ${cfg.snCls}">${s.sesi}</div><div class="session-info"><div class="session-label">Sesi ${s.sesi}</div><div class="session-time">${s.waktu}</div></div></div>
+      <div class="pengawas-section"><div class="section-title pt">Tim Pengawas</div>
+        <div class="pengawas-row"><div class="p-avatar av1">${s.p1[0]}</div><div><div class="p-name">${s.p1[1]}</div><div class="p-role">Pengawas 1</div></div></div>
+        <div class="pengawas-row"><div class="p-avatar av2">${s.p2[0]}</div><div><div class="p-name">${s.p2[1]}</div><div class="p-role">Pengawas 2</div></div></div>
+      </div>
+      <div class="peserta-section"><div class="section-title st">Daftar Peserta (${s.total} siswa)</div>
+        <button class="toggle-btn" onclick="toggle(this)">Tampilkan Peserta <span>▼</span></button>
+        <div class="peserta-list"><div class="peserta-grid">${pesertaHtml}</div></div>
+      </div>
+    </div>`;
+            });
+            document.getElementById('day' + (dayIdx + 1)).innerHTML = h;
+        }
+
+        for (let i = 0; i < 4; i++) renderDay(i);
+
+        function switchDay(d) {
+            document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.className = 'tab');
+            document.getElementById('day' + d).classList.add('active');
+            document.getElementById('tab' + d).classList.add('active-d' + d);
+        }
+        function toggle(btn) {
+            const list = btn.nextElementSibling; const o = list.classList.toggle('open');
+            btn.innerHTML = (o ? 'Sembunyikan Peserta <span>▲</span>' : 'Tampilkan Peserta <span>▼</span>');
+        }
+
+        function closePopup() {
+            document.getElementById('infoPopup').classList.add('hidden');
+        }
+
+        const kegiatanDates = [
+            { gl1: '23-24 Februari 2026', gl2: '25-26 Februari 2026' },
+            { gl1: '9-10 Maret 2026', gl2: '11-12 Maret 2026' },
+            { gl1: '6-7 April 2026', gl2: '8-9 April 2026' }
+        ];
+        function selectKegiatan(idx) {
+            document.querySelectorAll('.kegiatan-card').forEach(c => c.classList.remove('active'));
+            document.getElementById('kg' + idx).classList.add('active');
+            document.getElementById('gl1-date').textContent = kegiatanDates[idx].gl1;
+            document.getElementById('gl2-date').textContent = kegiatanDates[idx].gl2;
+        }
+    </script>
+</body>
+
+</html>
